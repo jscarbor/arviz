@@ -304,8 +304,8 @@ def concat(*args, dim=None, copy=True, inplace=False, reset_dim=True):
                     )
                     msg += " Valid dimensions are `chain` and `draw`."
                     raise TypeError(msg)
-            group_data = getattr(arg, group)
-            args_groups[group] = deepcopy(group_data) if copy else group_data
+                group_data = getattr(arg, group)
+                args_groups[group] = deepcopy(group_data) if copy else group_data
         # add arg0 to args_groups if inplace is False
         if not inplace:
             for group in arg0_groups:
@@ -314,12 +314,15 @@ def concat(*args, dim=None, copy=True, inplace=False, reset_dim=True):
 
         basic_order = [
             "posterior",
-            "posterior_predictive",
             "sample_stats",
+            "posterior_predictive",
+            "observed_data",
+            "constant_data",
+            "predictions",
+            "constant_data_predictions",
             "prior",
             "prior_predictive",
             "sample_stats_prior",
-            "observed_data",
         ]
         other_groups = [group for group in args_groups if group not in basic_order]
 
